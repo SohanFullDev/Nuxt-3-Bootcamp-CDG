@@ -3,13 +3,16 @@ import heartFilled from "@/assets/heartFilled.png";
 import heartOutline from "@/assets/heartOutline.png";
   const props = defineProps({
     car: Object,
+    favored: Boolean
 
   });
 
+  const emit = defineEmits(['favor'])
+
+  /*
   const favored = useState(`favored-${props.car.id}`, () => {
     return false
-
-   });
+   });*/
   
 </script>
 
@@ -20,7 +23,8 @@ import heartOutline from "@/assets/heartOutline.png";
     <img class="absolute w-7 right-5 top-2 z-20" 
     :src="favored ? heartFilled : heartOutline" 
     alt="" 
-    @click="favored = !favored">
+    @click="emit('favor', car.id)"
+    />
 
          <div class="flex h-full" @click="navigateTo(`/car/${car.name}-${car.id}`)">
         
