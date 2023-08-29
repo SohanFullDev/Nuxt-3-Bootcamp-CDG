@@ -15,6 +15,7 @@ const { makes } = useCars();
  });
 
  const route = useRoute();
+ const router = useRouter();
 //console.log(route.query);
  const priceRangeText = computed(() => {
   const minPrice = route.query.minPrice;
@@ -60,7 +61,18 @@ const { makes } = useCars();
 
  }
  const onChangePrice = () => {
-  updateModal('price')
+  updateModal('price');
+  if(priceRange.value.max && priceRange.value.min){
+    if(priceRange.value.min > priceRange.value.max) return;
+  }
+  router.push({
+    query: {
+      minPrice: priceRange.value.min,
+      maxPrice: priceRange.value.max,
+
+    },
+
+  });
 
  }
 
