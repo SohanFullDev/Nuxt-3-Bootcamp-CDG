@@ -15,9 +15,25 @@ const { makes } = useCars();
  });
 
  const route = useRoute();
+//console.log(route.query);
+ const priceRangeText = computed(() => {
+  const minPrice = route.query.minPrice;
+  const maxPrice = route.query.maxPrice;
 
+  if(!minPrice && !maxPrice) return "Any";
+  else if(!minPrice && maxPrice){
+    return `< $${maxPrice}`
+  }
+  else if(minPrice && !maxPrice){
+    return `> $${minPrice}`
+  }
+  else {
+    return `$${minPrice}-$${maxPrice}`
+  }
 
- const updateModal = (key) =>{
+ });
+ 
+  const updateModal = (key) =>{
   modal.value[key] = !modal.value[key];
 
  };
@@ -85,8 +101,9 @@ const { makes } = useCars();
         <!-- PRICE START -->
        <div class="p-5 flex justify-between relative cursor-pointer border-b">
          <h3>Price</h3>
-         <h3 class="text-blue-400 capitalize"></h3>
-         <div class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white">
+         <h3 class="text-blue-400 capitalize">{{priceRangeText}}</h3>
+         <div class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white"
+          v-if="modal.price">
         <input
          class="border p-1 rounded"
          type="number" 
@@ -104,4 +121,5 @@ const { makes } = useCars();
        <!-- PRICE END -->
      </div>
 </template>
+
 
