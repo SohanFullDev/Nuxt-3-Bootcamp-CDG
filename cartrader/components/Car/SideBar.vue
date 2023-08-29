@@ -30,6 +30,11 @@ const { makes } = useCars();
   navigateTo(`/city/${city.value}/car/${route.params.make}`);
   city.value = "";
 
+ };
+ const onChangeMake = (make) => {
+  updateModal("make")
+  navigateTo(`/city/${route.params.city}/car/${make}`)
+
  }
 
 </script>
@@ -64,7 +69,7 @@ const { makes } = useCars();
           {{ route.params.make || "Any" }}
           </h3>
          <div class="absolute border shadow left-56 p-5 top-1 -m-1 w-[600px] flex justify-between flex-wrap bg-white" v-if="modal.make">
-    <h4 v-for="make in makes" :key="make" class="w-1/3" @click="onChangeMake">{{ make}}</h4>      
+    <h4 v-for="make in makes" :key="make" class="w-1/3" @click="onChangeMake(make)">{{ make}}</h4>      
 
          </div>
        </div>
