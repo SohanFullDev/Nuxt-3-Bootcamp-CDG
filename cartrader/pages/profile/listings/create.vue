@@ -100,7 +100,7 @@
       placeholder=""
       @change-input="onChangeInput"
      />   
-     <CarAdImage />
+     <CarAdImage @change-input="onChangeInput" />
      
 
 
